@@ -76,7 +76,7 @@ console.log(getStudentName(students[0]));
 //   **********/
 
 function getCourse(student, courseIndex) {
-  return student.courses(courseIndex);
+  return student.courses[courseIndex];
 }
 console.log(getCourse(students[4], 2));
 
@@ -116,7 +116,6 @@ function countCourses(student) {
 }
 console.log(countCourses(students[1]));
 
-
 /**********
     Question 5: 🌶️🌶️
     listAllCourses(students):
@@ -133,12 +132,14 @@ console.log(countCourses(students[1]));
     **********/
 function listAllCourses(students) {
   let unique = [];
-  students.forEach((x) => {
-    student.courses.forEach((y)=>{
-      if(unique.includes(course))
-    })
+  students.forEach((student) => {
+    student.courses.forEach((course) => {
+      if (!unique.includes(course)) {
+        unique.push(course);
+      }
+    });
   });
-
+  return unique;
 }
 console.log(listAllCourses(students));
 
@@ -155,10 +156,10 @@ console.log(listAllCourses(students));
     **********/
 
 function removeCourseFromStudent(student, course) {
- student.courses= student.courses.filter((x)=> x!=courses);
- return student;
+  student.courses = student.courses.filter((x) => x != course);
+  return student;
 }
-console.log(removeCourseFromStudent(students[6],"Science"));
+console.log("test", removeCourseFromStudent(students[6], "Science"));
 
 /**********
     Question 7:
@@ -171,10 +172,10 @@ console.log(removeCourseFromStudent(students[6],"Science"));
     **********/
 
 function findStudentById(studentId, students) {
-  return student.find((x)=> x.id == studentId)
+  return students.find((x) => x.id == studentId);
 }
 
-console.log(findStudentById(10,students));
+console.log(findStudentById(10, students));
 
 /**********
     Question 8: 🌶️🌶️🌶️
@@ -200,8 +201,14 @@ console.log(findStudentById(10,students));
   ]
     **********/
 
-// function getStudentsByCourse(course, students) {
-//   student.
-// }
+function getStudentsByCourse(course, students) {
+  let arr = [];
+  students.forEach((student) => {
+    if (student.courses.includes(course)) {
+      arr.push(student);
+    }
+  });
+  return arr;
+}
 
-// console.log(getStudentsByCourse("Music",students));
+console.log(getStudentsByCourse("Music", students));
